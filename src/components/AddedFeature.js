@@ -16,4 +16,5 @@ const AddedFeature = props => {
   );
 };
 
+//syntax for grabbing actions from the sore without grabbing global state data
 export default connect(null, {removeFeature})(AddedFeature);
