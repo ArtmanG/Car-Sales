@@ -18,7 +18,7 @@ export const initialState = {
 export const appReducer = (state = initialState, action) => {
   switch (action.type){
       
-      case 'ADD_ITEM':
+      case 'BUY_ITEM':
           return {
               ...state,
               additionalPrice: state.additionalPrice + action.payload.price,
@@ -27,19 +27,22 @@ export const appReducer = (state = initialState, action) => {
                   features: [...state.car.features, action.payload]
               }
           }
-          case 'REMOVE_ITEM':
-              return{
-         
-                  ...state,
-                  additionalPrice: state.additionalPrice - action.payload.price,
-                  car:{
-                      ...state.car,
-                      features: [ ...state.car.features.filter(item=>{ if(item ===action.payload){
-                         return false 
-                         
-                      }else {return true}}) ]
-                  }
+
+      case 'REMOVE_FEATURE':
+          return{
+      
+              ...state,
+              additionalPrice: state.additionalPrice - action.payload.price,
+              car:{
+                  ...state.car,
+                  features: [ ...state.car.features.filter(item => { 
+                    if(item === action.payload) {
+                      return false  
+                    } else {return true}
+                  })]
               }
+          }
+          
       default: 
       return state
   }
