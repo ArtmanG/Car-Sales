@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const initialState = {
     additionalPrice: 0,
     car: {
@@ -17,8 +15,32 @@ export const initialState = {
     ]
   };
 
-export function appReducer() {
-    return {
-        title: 'Hi from the Redux store!'
-    }
+export const appReducer = (state = initialState, action) => {
+  switch (action.type){
+      
+      case 'ADD_ITEM':
+          return {
+              ...state,
+              additionalPrice: state.additionalPrice + action.payload.price,
+              car: {
+                  ...state.car,
+                  features: [...state.car.features, action.payload]
+              }
+          }
+          case 'REMOVE_ITEM':
+              return{
+         
+                  ...state,
+                  additionalPrice: state.additionalPrice - action.payload.price,
+                  car:{
+                      ...state.car,
+                      features: [ ...state.car.features.filter(item=>{ if(item ===action.payload){
+                         return false 
+                         
+                      }else {return true}}) ]
+                  }
+              }
+      default: 
+      return state
+  }
 }
